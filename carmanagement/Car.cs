@@ -16,6 +16,7 @@ public class Car
     {
         using (IDbConnection db = new SqlConnection(connectionstring))
         {
+            db.Open();
             string query = "INSERT INTO Cars (Brand, Model, Year, Price) VALUES (@Brand, @Model, @Year, @Price)";
             db.Execute(query, car);
         }
@@ -26,6 +27,7 @@ public class Car
     {
         using (IDbConnection db = new SqlConnection(connectionstring))
         {
+            db.Open()
             string query = "UPDATE Cars SET Price = @NewPrice WHERE Id = @CarId";
             db.Execute(query, new { NewPrice = newPrice, CarId = carId });
         }
@@ -35,6 +37,7 @@ public class Car
     {
         using (IDbConnection db = new SqlConnection(connectionstring))
         {
+            db.Open()
             string query = "DELETE FROM Cars WHERE Id = @CarId";
             db.Execute(query, new { CarId = carId });
         }
@@ -44,6 +47,7 @@ public class Car
     {
         using (IDbConnection db = new SqlConnection(connectionstring))
         {
+            db.Open()
             string query = "SELECT * FROM Cars";
             return db.Query<Car>(query).AsList();
         }
@@ -53,6 +57,7 @@ public class Car
     {
         using (IDbConnection db = new SqlConnection(connectionstring))
         {
+            db.Open()
             string query = "SELECT * FROM Cars WHERE Brand = @BrandName";
             return db.Query<Car>(query, new { BrandName = brandName }).AsList();
         }
